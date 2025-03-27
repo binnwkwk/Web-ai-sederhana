@@ -66,7 +66,7 @@ Mau bikin versi lu sendiri? Gampang!
 ## **📱 Tampilan**  
 | **Landing Page** | **Chat Interface** |  
 |------------------|-------------------|  
-| ![Landing Page](./assets/web.png) ![Chat Page](./assets/chatai.png)|
+| ![Landing Page](./assets/web.png)|![Chat Page](./assets/chatai.png)|
 
 ---
 
