@@ -2,7 +2,7 @@
 **Website Chat AI Modern dengan Fitur Gokil**  
 
 ![Preview CF Chat AI](./assets/web.png)
-*[🔥 Live Demo](https://contoh-link-demo.com)*  
+*[🔥 Live Demo](https://yoshcasaster.github.io/Web-ai-sederhana/)*  
 
 ---
 
@@ -60,6 +60,8 @@ Mau bikin versi lu sendiri? Gampang!
   ```javascript
   const apiUrl = "https://api-sendiri.com/ai";  // Ganti ini
   ```
+- *[Saya Menggunakan Api Dari](https://api.siputzx.my.id/)*
+
 
 ---
 
