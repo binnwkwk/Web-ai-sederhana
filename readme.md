@@ -60,7 +60,7 @@ Mau bikin versi lu sendiri? Gampang!
   ```javascript
   const apiUrl = "https://api-sendiri.com/ai";  // Ganti ini
   ```
-- *[Saya Menggunakan Api Dari](https://api.siputzx.my.id/)*
+- *[Saya Menggunakan Api Dari siputzx](https://api.siputzx.my.id/)*
 
 
 ---
