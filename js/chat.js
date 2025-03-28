@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function fetchAIResponse(message, typingIndicator) {
         try {
-            const apiUrl = `https://api.siputzx.my.id/api/ai/claude-sonnet-35?content=${encodeURIComponent(message)}`;
+            const apiUrl = `https://api.siputzx.my.id/api/ai/gpt3?prompt=kamu%20adalah%20ai%20yang%20ceria&content=${encodeURIComponent(message)}`;
             const response = await fetch(apiUrl);
             const data = await response.json();
             
