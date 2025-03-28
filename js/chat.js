@@ -68,19 +68,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatMessage(content) {
-        // 1. Deteksi permintaan pembuatan file
+        // Pisahkan logika untuk deteksi dan pembuatan code block
         const filePattern = /(?:buat|create|file)\s+([\w-]+\.(html|css|js|javascript|py|python))\b([\s\S]*?)(?=\n\n|$)/gi;
-        let formatted = content.replace(filePattern, (_, filename, ext, code) => 
-            createCodeBlock(code.trim(), ext.toLowerCase(), filename)
-        );
+        const codeBlocks = [];
 
-        // 2. Deteksi blok kode biasa ```
-        formatted = formatted.replace(/```(\w*)([\s\S]*?)```/g, (_, lang, code) => 
-            createCodeBlock(code.trim(), lang || 'plaintext', getFilenameForLanguage(lang))
-        );
+        // Tangkap semua code block terlebih dahulu
+        content = content.replace(filePattern, (match, filename, ext, code) => {
+            const processedCode = createCodeBlock(code.trim(), ext.toLowerCase(), filename);
+            codeBlocks.push(processedCode);
+            return `{{CODE_BLOCK_${codeBlocks.length - 1}}}`;
+        });
 
-        // 3. Format paragraf dan list
-        return formatted.split('\n\n').map(para => 
+        // Tangkap code block dengan ```
+        content = content.replace(/```(\w*)([\s\S]*?)```/g, (match, lang, code) => {
+            const filename = getFilenameForLanguage(lang);
+            const processedCode = createCodeBlock(code.trim(), lang || 'plaintext', filename);
+            codeBlocks.push(processedCode);
+            return `{{CODE_BLOCK_${codeBlocks.length - 1}}}`;
+        });
+
+        // Proses paragraf dan list
+        let formatted = content.split('\n\n').map(para => 
             para.startsWith('- ') || para.startsWith('* ') 
                 ? `<ul>${
                     para.split('\n').map(item => 
@@ -89,6 +97,13 @@ document.addEventListener('DOMContentLoaded', function() {
                   }</ul>`
                 : `<p>${para}</p>`
         ).join('');
+
+        // Kembalikan code block ke posisi semula
+        codeBlocks.forEach((codeBlock, index) => {
+            formatted = formatted.replace(`{{CODE_BLOCK_${index}}}`, codeBlock);
+        });
+
+        return formatted;
     }
 
     function createCodeBlock(code, language, filename) {
@@ -261,7 +276,4 @@ document.addEventListener('DOMContentLoaded', function() {
             previewModal.classList.remove('show');
         }
     });
-
-    // Initialize
-   
 });
